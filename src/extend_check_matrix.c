@@ -51,7 +51,7 @@ bool is_row_in_span_of_other_rows(const size_t row_under_question, const size_t 
 	is_last_column_zero = (ix == num_columns);
 
 	//clean up
-	for(size_t i=0;i<row_under_question;i++){
+	for(size_t i=0;i<row_under_question + 1;i++){
 		free(matrix[i]);
 	}
 	free(matrix);

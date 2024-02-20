@@ -6,7 +6,7 @@
  * This file contains functionality to work with a "check matrix", which
  * is a binary \f$k\f$ x \f$2n\f$ matrix with \f$k\leq n\f$, such that:
  * - the matrix is full rank
- * - each pair of rows `v` and `w` should have symplectic inner product \f$\sum_{m=1}^{2n} v_m \cdot w_n \f$ equal to zero, where \f$\cdot\f$ indicates binary multiplication
+ * - each pair of rows `v` and `w` should have symplectic inner product \f$\sum_{m=1}^{2n} v_m \cdot w_{m + n \text{ mod } 2n}  \f$ equal to zero, where \f$\cdot\f$ indicates binary multiplication and summation is modulo 2
  *
  * <b> Typical example usage:</b>
  * \include example_extend_check_matrix.c
@@ -49,7 +49,7 @@ bool is_row_in_span_of_other_rows(const size_t row_under_question, const size_t 
  * to a check matrix with dimensions `num_qubits` x \f$2 \cdot\f$`num_qubits`.
  *
  * @pre `extended_check_matrix` has dimensions `num_qubits` x \f$2 \cdot\f$`num_qubits`.
- * The last `num_qubits - num_rows` will be overwritten.
+ * The last `num_qubits - num_rows` rows will be overwritten.
  *
  */
 void extend_rref_check_matrix(const size_t num_rows, const size_t num_qubits, bool** extended_check_matrix);
