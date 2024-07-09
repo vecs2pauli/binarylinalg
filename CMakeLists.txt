@@ -13,23 +13,12 @@ add_subdirectory(src)
 # tests
 add_subdirectory(tests)
 
-enable_testing()
+include(CTest)
 add_test(NAME extend-check-matrix COMMAND test_extend_check_matrix)
 add_test(NAME solve-linear-system COMMAND test_solve_linear_system)
 
+# examples
+add_subdirectory(examples)
 
-#install(
-#  TARGETS binarylinalg
-#  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-#  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#)
-
-
-#install(
-#  DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
-#  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-#)
-#
-#include(FeatureSummary)
-#feature_summary(WHAT ALL)
+add_test(NAME example-extend-check-matrix COMMAND example_extend_check_matrix)
+add_test(NAME example-solve-linear-system COMMAND example_solve_linear_system)
