@@ -21,12 +21,10 @@ void test_one(){
     // 0 0 0 1 1 0
     // 0 0 0 0 1 1
 
-    #define num_qubits_test_one 3
-    #define num_rows_test_one 2
-    const size_t num_rows = num_rows_test_one;
-    const size_t num_qubits = num_qubits_test_one;
+    const size_t num_qubits = 3;
+    const size_t num_rows = 2;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits_test_one];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool*) * num_qubits);
 
     bool _first_row[6] = {false, false, false, true, true, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -43,7 +41,7 @@ void test_one(){
     // test the outputted check matrix
     // 1. verify that its first two rows haven't changed
 
-    bool* expected_outputted_check_matrix[num_rows_test_one];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool*) * num_rows);
     bool _expected_first_row[6] = {false, false, false, true, true, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
 
@@ -67,6 +65,7 @@ void test_one(){
     bring_into_rref(num_qubits, num_variables, num_qubits, num_variables, extended_check_matrix);
     assert(!is_row_in_span_of_other_rows(num_qubits - 1, num_variables, extended_check_matrix));
 
+    free(extended_check_matrix); free(expected_outputted_check_matrix);
 
 }
 
@@ -77,12 +76,10 @@ void test_two(){
     // 1 1 0 0 1 1 0 0
     // 1 1 1 1 0 0 0 0
 
-    #define num_rows_test_two 2
-    #define num_qubits_test_two 4
-    const size_t num_rows = num_rows_test_two;
-    const size_t num_qubits = num_qubits_test_two;
+    const size_t num_rows = 2;
+    const size_t num_qubits = 4;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits_test_two];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool*) * num_qubits);
 
     bool _first_row[8] = {true, true, false, false, true, true, false, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -101,7 +98,7 @@ void test_two(){
 
     // test the outputted check matrix
     // 1. verify that its first two rows haven't changed
-    bool* expected_outputted_check_matrix[num_rows_test_two];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool*) * num_rows);
     bool _expected_first_row[8] = {true, true, false, false, true, true, false, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
 
@@ -125,6 +122,7 @@ void test_two(){
     bring_into_rref(num_qubits, num_variables, num_qubits, num_variables, extended_check_matrix);
     assert(!is_row_in_span_of_other_rows(num_qubits - 1, num_variables, extended_check_matrix));
 
+    free(extended_check_matrix); free(expected_outputted_check_matrix);
 }
 
 
@@ -134,12 +132,10 @@ void test_three(){
     // creating the check matrix for 'X'
     // 1 0
 
-    #define num_rows_test_three 1
-    #define num_qubits_test_three 1
-    const size_t num_rows = num_rows_test_three;
-    const size_t num_qubits = num_qubits_test_three;
+    const size_t num_rows = 1;
+    const size_t num_qubits = 1;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits_test_three];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool*) * num_qubits);
 
     bool _first_row[2] = {true, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -149,7 +145,7 @@ void test_three(){
 
     // test the outputted check matrix
     // 1. verify that its first two rows haven't changed
-    bool* expected_outputted_check_matrix[num_rows_test_three];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool*) * num_rows);
     bool _expected_first_row[2] = {true, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
 
@@ -170,6 +166,7 @@ void test_three(){
     bring_into_rref(num_qubits, num_variables, num_qubits, num_variables, extended_check_matrix);
     assert(!is_row_in_span_of_other_rows(num_qubits - 1, num_variables, extended_check_matrix));
 
+    free(extended_check_matrix); free(expected_outputted_check_matrix);
 }
 
 void test_four(){
@@ -178,12 +175,10 @@ void test_four(){
     // creating the check matrix for 'X'
     // 1 0
 
-    #define num_rows_test_four 1
-    #define num_qubits_test_four 1
-    const size_t num_rows = num_rows_test_four;
-    const size_t num_qubits = num_qubits_test_four;
+    const size_t num_rows = 1;
+    const size_t num_qubits = 1;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits_test_four];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool*) * num_qubits);
 
     bool _first_row[2] = {true, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -193,7 +188,7 @@ void test_four(){
 
     // test the outputted check matrix
     // 1. verify that its first two rows haven't changed
-    bool* expected_outputted_check_matrix[num_rows_test_four];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool*) * num_rows);
     bool _expected_first_row[2] = {true, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
 
@@ -214,6 +209,7 @@ void test_four(){
     bring_into_rref(num_qubits, num_variables, num_qubits, num_variables, extended_check_matrix);
     assert(!is_row_in_span_of_other_rows(num_qubits - 1, num_variables, extended_check_matrix));
 
+    free(extended_check_matrix); free(expected_outputted_check_matrix);
 }
 
 void test_five(){
@@ -223,12 +219,10 @@ void test_five(){
     // 1 0 0 0 1 1 1 0 1 1 0 0
     // 0 0 1 1 1 1 0 0 1 1 1 1
     //
-    #define num_rows_test_five 2
-    #define num_qubits_test_five 6
-    const size_t num_rows = num_rows_test_five;
-    const size_t num_qubits = num_qubits_test_five;
+    const size_t num_rows = 2;
+    const size_t num_qubits = 6;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits_test_five];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool*) * num_qubits);
 
     bool _first_row[12] =  {true,  false, false, false, true, true,  true,  false, true, true, false, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -253,7 +247,7 @@ void test_five(){
 
     // test the outputted check matrix
     // 1. verify that its first two rows haven't changed
-    bool* expected_outputted_check_matrix[num_rows_test_five];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool*) * num_rows);
 
     bool _expected_first_row[12] = {true,  false, false, false, true, true,  true,  false, true, true, false, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
@@ -277,6 +271,8 @@ void test_five(){
     // 3. verify that it is full rank
     bring_into_rref(num_qubits, num_variables, num_qubits, num_variables, extended_check_matrix);
     assert(!is_row_in_span_of_other_rows(num_qubits - 1, num_variables, extended_check_matrix));
+    
+    free(extended_check_matrix); free(expected_outputted_check_matrix);
 }
 
 
@@ -288,108 +284,5 @@ int main(){
 	test_three();
 	test_four();
 	test_five();
-	return 0;
-
-
-    // INITIALISING THE PROBLEM
-    // creating the check matrix for 'XXX, YYI'
-    // creating the check matrix for 'ZZI', 'IZZ'
-    // creating the check matrix for 'XXXX, ZZII, IZZI
-    // 0 0 0 1 1 0
-    // 0 0 0 0 1 1
-
-    #define num_rows_main 3
-    #define num_qubits_main 4
-    const size_t num_rows = num_rows_main;
-    const size_t num_qubits = num_qubits_main;
-    const size_t num_variables = 2 * num_qubits;
-
-    // array of pointers to arrays of bools
-    bool* check_matrix[num_rows_main];
-    bool* row;
-
-    row = (bool*) malloc(sizeof(bool) * num_variables);
-    row[0] = true;
-    row[1] = true;
-    row[2] = true;
-    row[3] = true;
-    row[4] = false;
-    row[5] = false;
-    row[6] = false;
-    row[7] = false;
-    check_matrix[0] = &(row[0]);
-
-    row = (bool*) malloc(sizeof(bool) * num_variables);
-    row[0] = false;
-    row[1] = false;
-    row[2] = false;
-    row[3] = false;
-    row[4] = true;
-    row[5] = true;
-    row[6] = false;
-    row[7] = false;
-    check_matrix[1] = &(row[0]);
-
-    row = (bool*) malloc(sizeof(bool) * num_variables);
-    row[0] = false;
-    row[1] = false;
-    row[2] = false;
-    row[3] = false;
-    row[4] = false;
-    row[5] = true;
-    row[6] = true;
-    row[7] = false;
-    check_matrix[2] = &(row[0]);
-
-    ulog("Matrix:");
-    print_matrix(num_rows, num_variables, check_matrix);
-
-    // SOLVING THE PROBLEM
-    bring_into_rref(num_rows, num_variables, num_rows, num_variables, check_matrix);
-
-    ulog("\nRREF Matrix:");
-    print_matrix(num_rows, num_variables, check_matrix);
-    //ulog("HERE");
-
-    //initialize solutions: matrix of num_variables rows and num_variables+1 columns
-    //first column is solution to inhomogeneous equation
-    //remaining columns are a basis of solutions to homogeneous equation
-
-//    int num_sols = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
-
-    // INFO: we add another column which indicates if the row was already present in the original check matrix
-    bool* extended_check_matrix[num_qubits_main];
-    for(size_t i=0;i<num_qubits;i++){
-    	row = (bool*) malloc(sizeof(bool) * (num_variables));
-	extended_check_matrix[i] = &(row[0]);
-    }
-
-    //initialise the top part of extended_check_matrix to equal check_matrix; the rest of the rows only contain zeroes
-    for(size_t i=0;i<num_rows;i++){
-    	for(size_t j=0;j<num_variables;j++){
-	    extended_check_matrix[i][j] = check_matrix[i][j];
-	}
-    }
-    for(size_t i=num_rows;i<num_qubits;i++){
-    	for(size_t j=0;j<num_variables;j++){
-	    extended_check_matrix[i][j] = false;
-	}
-    }
-
-
-    extend_rref_check_matrix(num_rows, num_qubits, extended_check_matrix);
-
-    printf("Extended check matrix:\n");
-    print_matrix(num_qubits, num_variables, extended_check_matrix);
-    
-    // cleaning up
-
-    for(size_t i=0;i<num_rows;i++){
-	    free(check_matrix[i]);
-    }
-    for(size_t i=0;i<num_qubits;i++){
-	    free(extended_check_matrix[i]);
-    }
-
 	return 0;
 }
