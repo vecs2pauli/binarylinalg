@@ -22,16 +22,16 @@
 #include "matrix.h"
 
 
+#define NUM_ROWS 1
+#define NUM_QUBITS 2
+#define NUM_VARIABLES (2 * NUM_QUBITS)
 
 
 int main(){
     // INITIALISING THE PROBLEM
     // 1 0 0 0
 
-    const size_t num_rows = 1;
-    const size_t num_qubits = 2;  // the variable `n`
-    const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits];
+    bool* extended_check_matrix[NUM_QUBITS];
 
     bool _first_row[4] = {true, false, false, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -40,11 +40,11 @@ int main(){
     extended_check_matrix[1] = &(_second_row[0]);
 
     // SOLVING THE PROBLEM
-    extend_rref_check_matrix(num_rows, num_qubits, extended_check_matrix);
+    extend_rref_check_matrix(NUM_ROWS, NUM_QUBITS, extended_check_matrix);
 
     // TEST the outputted check matrix:
     // verify that its first rows hasn't changed
-    bool* expected_outputted_check_matrix[num_rows];
+    bool* expected_outputted_check_matrix[NUM_ROWS];
     bool _expected_first_row[4] = {true, false, false, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
 

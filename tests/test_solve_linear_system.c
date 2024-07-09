@@ -30,7 +30,7 @@ void test_one(){
     const size_t num_columns = num_variables + 1;
 
     // array of pointers to arrays of bools
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
 
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -61,7 +61,7 @@ void test_one(){
     //initialize solutions: matrix of num_variables rows and num_variables+1 columns
     //first column is solution to inhomogeneous equation
     //remaining columns are a basis of solutions to homogeneous equation
-    bool* solutions[num_variables];
+    bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     for(size_t row_ix=0;row_ix<num_variables;row_ix++){
     	row = (bool*) malloc(sizeof(bool) * (num_variables + 1));
     	for(size_t column_ix=0;column_ix<num_variables + 1;column_ix++){
@@ -72,7 +72,7 @@ void test_one(){
 
 
 
-    int solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
+    size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
 
     //verify correctness:
     // the solution to the inhomogeneous equation is [1, 0, 1]
@@ -93,9 +93,11 @@ void test_one(){
     for(size_t i=0;i<num_rows;i++){
 	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
 	    free(solutions[i]);
     }
+    free(solutions);
 }
 
 
@@ -112,7 +114,7 @@ void test_two(){
     const size_t num_columns = num_variables + 1;
 
     // array of pointers to arrays of bools
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
 
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -139,7 +141,7 @@ void test_two(){
     //initialize solutions: matrix of num_variables rows and num_variables+1 columns
     //first column is solution to inhomogeneous equation
     //remaining columns are a basis of solutions to homogeneous equation
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     for(size_t row_ix=0;row_ix<num_variables;row_ix++){
     	row = (bool*) malloc(sizeof(bool) * (num_variables + 1));
     	for(size_t column_ix=0;column_ix<num_variables + 1;column_ix++){
@@ -148,7 +150,7 @@ void test_two(){
 	solutions[row_ix] = &(row[0]);
     }
 
-    int solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
+    size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
 
 
 
@@ -178,14 +180,16 @@ void test_two(){
     for(size_t i=0;i<num_rows;i++){
 	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
 	    free(solutions[i]);
     }
+    free(solutions);
 }
 
 
 
-int test_three(){
+void test_three(){
 
     // INITIALISATION:
     /* We create the following matrix
@@ -199,7 +203,7 @@ int test_three(){
     const size_t num_variables = 3;
     const size_t num_columns = num_variables + 1;
  
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
  
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -231,7 +235,7 @@ int test_three(){
     //Initialize `solutions`: a matrix of 3 rows and 4 columns (num_variables and num_variables + 1, respectively)
     //The first column is solution to inhomogeneous equation M * v = b
     //The remaining columns are a basis of solutions v to the homogeneous equation M * v = (0, 0, 0)
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     allocate_and_fill_solutions_template(num_variables, solutions);
 
     size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
@@ -266,18 +270,20 @@ int test_three(){
     }
  
     
-    // Cleaning up
+    // cleaning up
     for(size_t i=0;i<num_rows;i++){
-        free(matrix[i]);
+	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
-        free(solutions[i]);
+	    free(solutions[i]);
     }
+    free(solutions);
 
 }
 
 
-int test_four(){
+void test_four(){
 
     // INITIALISATION:
     /* We create the following matrix
@@ -300,7 +306,7 @@ b =
     const size_t num_variables = 3;
     const size_t num_columns = num_variables + 1;
  
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
  
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -332,7 +338,7 @@ b =
     //Initialize `solutions`: a matrix of 3 rows and 4 columns (num_variables and num_variables + 1, respectively)
     //The first column is solution to inhomogeneous equation M * v = b
     //The remaining columns are a basis of solutions v to the homogeneous equation M * v = (0, 0, 0)
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     allocate_and_fill_solutions_template(num_variables, solutions);
 
     size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
@@ -366,17 +372,19 @@ b =
     }
  
     
-    // Cleaning up
+    // cleaning up
     for(size_t i=0;i<num_rows;i++){
-        free(matrix[i]);
+	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
-        free(solutions[i]);
+	    free(solutions[i]);
     }
+    free(solutions);
 
 }
 
-int test_five(){
+void test_five(){
 
     // INITIALISATION:
     /* We create the following matrix
@@ -399,7 +407,7 @@ b =
     const size_t num_variables = 3;
     const size_t num_columns = num_variables + 1;
  
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
  
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -431,7 +439,7 @@ b =
     //Initialize `solutions`: a matrix of 3 rows and 4 columns (num_variables and num_variables + 1, respectively)
     //The first column is solution to inhomogeneous equation M * v = b
     //The remaining columns are a basis of solutions v to the homogeneous equation M * v = (0, 0, 0)
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     allocate_and_fill_solutions_template(num_variables, solutions);
 
     size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
@@ -439,17 +447,19 @@ b =
     // the system is unsolvable
     assert(solution_space_dimension == -1);
 
-    // Cleaning up
+    // cleaning up
     for(size_t i=0;i<num_rows;i++){
-        free(matrix[i]);
+	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
-        free(solutions[i]);
+	    free(solutions[i]);
     }
+    free(solutions);
 
 }
 
-int test_six(){
+void test_six(){
 
     // INITIALISATION:
     /* We create the following matrix
@@ -473,7 +483,7 @@ b=
     const size_t num_variables = 3;
     const size_t num_columns = num_variables + 1;
  
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
  
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -505,7 +515,7 @@ b=
     //Initialize `solutions`: a matrix of 3 rows and 4 columns (num_variables and num_variables + 1, respectively)
     //The first column is solution to inhomogeneous equation M * v = b
     //The remaining columns are a basis of solutions v to the homogeneous equation M * v = (0, 0, 0)
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     allocate_and_fill_solutions_template(num_variables, solutions);
 
     size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
@@ -539,17 +549,19 @@ b=
     }
  
     
-    // Cleaning up
+    // cleaning up
     for(size_t i=0;i<num_rows;i++){
-        free(matrix[i]);
+	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
-        free(solutions[i]);
+	    free(solutions[i]);
     }
+    free(solutions);
 
 }
 
-int test_seven(){
+void test_seven(){
 
     // INITIALISATION:
     /* We create the following matrix
@@ -573,7 +585,7 @@ b=
     const size_t num_variables = 3;
     const size_t num_columns = num_variables + 1;
  
-    bool* matrix[num_rows];
+    bool** matrix = (bool**) malloc (sizeof(bool*) * num_rows);
     bool* row;
  
     row = (bool*) malloc(sizeof(bool) * num_columns);
@@ -605,7 +617,7 @@ b=
     //Initialize `solutions`: a matrix of 3 rows and 4 columns (num_variables and num_variables + 1, respectively)
     //The first column is solution to inhomogeneous equation M * v = b
     //The remaining columns are a basis of solutions v to the homogeneous equation M * v = (0, 0, 0)
-    bool* solutions[num_variables];
+        bool** solutions = (bool**) malloc(sizeof(bool*) * num_variables);
     allocate_and_fill_solutions_template(num_variables, solutions);
 
     size_t solution_space_dimension = solutions_from_rref(num_rows, num_columns, num_variables, matrix, solutions);
@@ -640,13 +652,15 @@ b=
     }
  
     
-    // Cleaning up
+    // cleaning up
     for(size_t i=0;i<num_rows;i++){
-        free(matrix[i]);
+	    free(matrix[i]);
     }
+    free(matrix);
     for(size_t i=0;i<num_variables;i++){
-        free(solutions[i]);
+	    free(solutions[i]);
     }
+    free(solutions);
 
 }
 
