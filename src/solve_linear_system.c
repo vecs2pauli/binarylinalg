@@ -23,7 +23,7 @@ bool single_solution_from_rref(const size_t num_rows, const size_t num_columns, 
 			// no more pivots to be found, hence this row and all rows below will only contain zeroes (since the matrix is in RREF)
 			// Hence only a solution is possible if this entry in 'b' and all next ones may only contain zeroes
 			for(row_ix=row;row_ix<num_rows;row_ix++){
-				if(matrix[num_columns-1][row_ix])
+				if(matrix[row_ix][num_columns-1])
 				{
 					// no solutions possible
 					return false;
