@@ -126,7 +126,7 @@ Further documentation can be found at [https://vecs2pauli.github.io/](https://ve
 To generate the documentation locally, install `doxygen` and run
 
 ```
-doxygen docs.conf
+doxygen doxyfile.in
 ```
 
 Then open `docs/html/index.html` in your web browser.
