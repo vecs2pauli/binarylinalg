@@ -8,6 +8,7 @@ CHANGELOG
 - fixed memory leak in function `is_row_in_span_of_other_rows` and in the file `extend_check_matrix.c`
 - code prettyfying: use `const` instead of `#define` for defining some constants. This required replaced array allocations in examples and test with dynamic memory allocation in case the array size was defined with `const`
 - corrections in documentation
+- updated README.md: the updated example of how to use binarylinalg as library also runs on Windows
 
 
 2023-12-27 (0.0.1)
