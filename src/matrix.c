@@ -22,7 +22,7 @@ void print_matrix(const size_t num_rows, const size_t num_columns, bool** matrix
 	for(size_t row_ix=0;row_ix<num_rows;row_ix++){
 		printlogstring();
 		for(size_t column_ix=0;column_ix<num_columns;column_ix++){
-			printf("%b,", matrix[row_ix][column_ix]);
+			printf("%i,", matrix[row_ix][column_ix]);
 		}
 	}
 }
@@ -30,7 +30,7 @@ void print_matrix(const size_t num_rows, const size_t num_columns, bool** matrix
 void print_vector(const size_t num_rows, bool* vector){
 	for(size_t row_ix=0;row_ix<num_rows;row_ix++){
 		printlogstring();
-			printf("%b,", vector[row_ix]);
+		printf("%i,", vector[row_ix]);
 	}
 }
 
