@@ -83,10 +83,10 @@ int main(){
     // creating the check matrix for 'X'
     // 1 0
 
-    const size_t num_rows = 1;
     const size_t num_qubits = 1;
+    const size_t num_rows = num_qubits;
     const size_t num_variables = 2 * num_qubits;
-    bool* extended_check_matrix[num_qubits];
+    bool** extended_check_matrix = (bool**) malloc(sizeof(bool) * num_rows);
 
     bool _first_row[2] = {true, false};
     extended_check_matrix[0] = &(_first_row[0]);
@@ -96,9 +96,12 @@ int main(){
 
     // TEST the outputted check matrix:
     // verify that its first rows hasn't changed
-    bool* expected_outputted_check_matrix[num_rows];
+    bool** expected_outputted_check_matrix = (bool**) malloc(sizeof(bool) * num_rows);
     bool _expected_first_row[2] = {true, false};
     expected_outputted_check_matrix[0] = &(_expected_first_row[0]);
+
+    free(extended_check_matrix);
+    free(expected_outputted_check_matrix);
 
     printf("Done\n");
 
